@@ -14,8 +14,8 @@
         <div class="glass-container">
             <h1>Welcome to Kid's Game!</h1>
             <div class="buttons-holder">
-                <button type="button" class="btn btn-success">Login</button>
-                <button type="button" class="btn btn-success">SignUp</button>
+                <a class="btn btn-success" href="src\Login\index.php">Login</a>
+                <a class="btn btn-success" href="src\SignUp\index.php">Register</a>
             </div>
         </div>
     </div>
