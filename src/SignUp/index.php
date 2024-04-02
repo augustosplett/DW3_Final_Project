@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div id="navigation">
-        <a href="login.html">Log in</a>
+        <a href="..\Login\index.php">Log in</a>
     </div>
 
 </body>

@@ -1,3 +1,5 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,11 +21,9 @@
             <input type="submit" value="Login">
         </form>
         <div class="password-change-link">
-            <a href="password_change.html">Forgot your password?</a>
+            <a href="..\PasswordManagement\index.php">Forgot your password?</a>
+            <a href="..\SignUp\index.php">Register</a>
         </div>
-    </div>
-    <div id="navigation">
-        <a href="register.html">Register</a>
     </div>
 </body>
 </html>
