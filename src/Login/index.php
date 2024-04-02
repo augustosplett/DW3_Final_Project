@@ -48,6 +48,40 @@
             });
         });
     // backend Juan Pinero
+
+session_start();
+
+$servername = "localhost";
+$port = '3306';        
+$username = "root"; 
+$password = "123"; 
+$database = "kidsGames"; 
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error en la conexión a la base de datos: " . $conn->connect_error);
+}
+
+// Obtener datos del formulario
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Consulta SQL para verificar credenciales
+$sql = "SELECT * FROM usuarios WHERE username='$username' AND password='$password'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $_SESSION['username'] = $username;
+    echo "success";
+} else {
+    echo "error";
+}
+
+$conn->close();
+    
     </script>
     
 </head>
