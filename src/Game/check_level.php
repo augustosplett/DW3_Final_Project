@@ -18,11 +18,13 @@ function checkLevel1($inputs) {
     if ($isAscending) {
         echo "Congratulations! You arranged the letters correctly in Ascending order.\n";
         $_SESSION['level'] +=1;
+        
         // Move to next level or perform necessary actions
     } 
+    header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']-1]);
       // Return true if inputs are in ascending order, false otherwise
-      return $isAscending;
-    } 
+    return $isAscending;
+} 
 
 function checkLevel2($inputs) {
         // Sort inputs alphabetically
@@ -145,6 +147,7 @@ if (!isset($_SESSION['level'])) {
     $_SESSION['score'] = 0;
 }
 
+$_SESSION['levelFiles'] = ['level1.php','level2.php','level3.php','level4.php','level5.php','level6.php'];
 
 // Check if the user has submitted the form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -158,10 +161,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Combine inputs into an array based on the level
   if ($_SESSION['level'] <= 6) {
-    $inputs = array($input1, $input2, $input3, $input4,  $input5,$input6);
+    $inputs = array($input1, $input2, $input3, $input4,  $input5, $input6);
+    
+
 } else {
     $inputs = array($input1, $input2);
 }
+
 // Check if any input is empty or not a letter
 function validateGameLevel($data, $order) {
     // Validate data type and order
@@ -221,6 +227,7 @@ if (empty($input1) || empty($input2) || empty($input3) || empty($input4) || empt
             $game_level = 'descending_letters';
         } else {
             echo 'Letters are not in the correct order for any game level.';
+            //header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']-1]);
         }
     }
     // Check if inputs contain only numbers
@@ -284,7 +291,8 @@ if ($isCorrect) {
     echo "Congratulations! You arranged the letters correctly in descending order.\n";
 } else {
     // Provide feedback to the user if the input is incorrect
-    echo "Sorry! The letters are not arranged correctly in descending order. Please try again.\n";
+    //echo "Sorry! The letters are not arranged correctly in descending order. Please try again.\n";
+    header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']-1]);
 }
 
             break;
