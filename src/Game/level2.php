@@ -34,7 +34,7 @@
             <label> letters are:
             <?php
                 // Function to generate six different random letters
-                function generate_letters_descending() {
+                function generate_letters() {
                     $letters = [];
                     while (count($letters) < 6) {
                         $letter = chr(rand(97, 122)); // Generates a lowercase letter
@@ -43,15 +43,21 @@
                         }
                     }
                     // Sort the letters in descending order
-                    rsort($letters);
+                    //rsort($letters);
+                    return $letters;
+                }
+                function sort_letters_descending($letters) {
+                    rsort($letters); // Sort the letters in ascending order
                     return $letters;
                 }
                 
                 // Generate 6 random letters in descending order
-                $letters_descending = generate_letters_descending();
-                
+                $letters = generate_letters();
+
                 // Display the generated letters in a comma-separated format
-                echo implode(", ", $letters_descending); 
+                echo implode(",", $letters); 
+                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(",", sort_letters_descending($letters)) . "\" style=\"display: none;\">";
+
             ?>
             </label>
         

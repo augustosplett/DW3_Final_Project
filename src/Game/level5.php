@@ -49,6 +49,7 @@
                 
                 // Display the generated letters in a comma-separated format
                 echo implode(", ", $letters); 
+                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(", ", $letters) . "\" style=\"display: none;\">";
 
                 /*// Call the function to identify the first (smallest) and last (largest) letter
                     list($firstLetter, $lastLetter) = identifyFirstLastLetters(implode("", $letters));

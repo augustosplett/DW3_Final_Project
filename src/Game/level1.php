@@ -52,12 +52,10 @@
                 // Generate 6 random letters
                 $letters = generate_letters();
                                 
-                // Sort the letters in ascending order
-                $sorted_letters = sort_letters_ascending($letters);
-                
                 // Display the sorted letters
-                echo implode(", ", $sorted_letters);
-                //echo "<input type=\"text\" value=\"$sorted_letters\">";
+                echo implode(",", $letters);
+                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(",", sort_letters_ascending($letters)) . "\" style=\"display: none;\">";
+
             ?>
             </label>
         

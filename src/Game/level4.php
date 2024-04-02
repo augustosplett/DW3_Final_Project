@@ -53,7 +53,9 @@
                 
                 // Display the generated numbers in a comma-separated format
                 echo implode(", ", $numbers);
-                ?>
+                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(", ", $numbers) . "\" style=\"display: none;\">";
+
+            ?>
             </label>
         
             <br><br>

@@ -45,7 +45,7 @@ function checkLevel2($inputs) {
 
           // Return true if inputs are in descending order, false otherwise
           return $isDescending;
-        } 
+} 
 
 
     
