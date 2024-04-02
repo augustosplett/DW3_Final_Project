@@ -19,29 +19,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($_SESSION['level'] <= 4){
         $inputs = []; //declare an array to receive the answers
 
-        $input1 = $_POST['input1'];
-        $input2 = $_POST['input2'];
-        $input3 = $_POST['input3'];
-        $input4 = $_POST['input4'];
-        $input5 = $_POST['input5'];
-        $input6 = $_POST['input6'];
+        $input1 = $_POST['input1'];//take the answer 1
+        $input2 = $_POST['input2'];//take the answer 2
+        $input3 = $_POST['input3'];//take the answer 3
+        $input4 = $_POST['input4'];//take the answer 4
+        $input5 = $_POST['input5'];//take the answer 5
+        $input6 = $_POST['input6'];//take the answer 6
 
         $inputs = array($input1, $input2, $input3, $input4,  $input5, $input6);
-    }else{
+    }else{//the levels 5 and 6 have just 2 answers
         $inputs = [];//declare an array to receive the answer
 
-        $input1 = $_POST['input1'];
-        $input2 = $_POST['input2'];
+        $input1 = $_POST['input1'];//take the answer 1
+        $input2 = $_POST['input2'];//take the answer 2
 
         $inputs = array($input1, $input2);
     }
 
     if(isset($_POST['submitBtn1'])){checkLevel1($inputs);}//call func to validate 1
-    if(isset($_POST['submitBtn2'])){}//call func to validate 1
-    if(isset($_POST['submitBtn3'])){}//call func to validate 1
-    if(isset($_POST['submitBtn4'])){}//call func to validate 1
-    if(isset($_POST['submitBtn5'])){}//call func to validate 1
-    if(isset($_POST['submitBtn6'])){}//call func to validate 1  
+    if(isset($_POST['submitBtn2'])){}//call func to validate 2
+    if(isset($_POST['submitBtn3'])){}//call func to validate 3
+    if(isset($_POST['submitBtn4'])){}//call func to validate 4
+    if(isset($_POST['submitBtn5'])){}//call func to validate 5
+    if(isset($_POST['submitBtn6'])){}//call func to validate 6  
 }
 
 
