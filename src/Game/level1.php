@@ -168,7 +168,7 @@ input[type="button"] {
 <body>
 <div class="container">
     <h1>level1 : Order these 6 letters in ascending order</h1>
-    <form id="level1-form" action="level2.php" method="post">
+    <form id="level1-form" action="game.php" method="post">
         <label> letters are:
         <?php
             // Function to generate six different random letters
@@ -196,11 +196,11 @@ input[type="button"] {
             
             // Display the sorted letters
             echo implode(", ", $sorted_letters);
+            //echo "<input type=\"text\" value=\"$sorted_letters\">";
         ?>
         </label>
      
         <br><br>
-        
         <input type="text" name="input1" maxlength="1" required>
         <input type="text" name="input2" maxlength="1" required>
         <input type="text" name="input3" maxlength="1" required>
@@ -217,7 +217,7 @@ input[type="button"] {
         <input type="button" id="cancelBtn" value="Cancel" onclick="cancelGame()">
        
         <!-- submit button using JavaScript added to disable the submit button until the level is completed  -->
-      <input type="submit" id="submitBtn" value="Submit" onclick="enableSubmitButton()">
+      <input type="submit" id="submitBtn1" name="submitBtn1" value="Submit" onclick="enableSubmitButton()">
     
     </div>
     </form>
