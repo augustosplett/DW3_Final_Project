@@ -30,13 +30,16 @@ if (isset($_POST['send'])){
         $errors[] = 'Passwords do not match';
     }
 
+    
+    $hashCode = password_hash($pass, PASSWORD_DEFAULT);
+
     // If there are no errors, proceed with user registration
     if (empty($errors)) {      
         
         $host = 'localhost'; 
         $port = '3306';
         $username = 'root';
-        $password = '123'; //erase or change for you password
+        $password = ''; //erase or change for you password
         $database = 'kidsGames'; 
 
         // Create connection
@@ -52,20 +55,26 @@ if (isset($_POST['send'])){
 
         if ($result->num_rows > 0) {
             // Username already exists, return error
-            $errors[] = 'Username already exists';
+            $registration_message = 'Username already exists';
+            //$errors[] = 'Username already exists';
             echo json_encode($errors);
         } else {
             // Username is available, proceed with registration
             $registration_time = date("Y-m-d H:i:s"); // Current time
             
-            $sql = "INSERT INTO player (fName, lName, userName, registrationTime) 
-                    VALUES ('$firstname', '$lastname', '$uName', '$registration_time')";
-            
-            if ($conn->query($sql) === TRUE) {
-                echo 'User registered successfully!';
-            } else {
-                echo 'Error: ' . $sql . '<br>' . $conn->error;
-            }
+            $sql_player = "INSERT INTO player (fName, lName, userName, registrationTime) 
+            VALUES ('$firstname', '$lastname', '$uName', '$registration_time')";
+                if (mysqli_query($conn, $sql_player)) {
+                
+                $registrationOrder = mysqli_insert_id($conn); 
+
+                $sql_authenticator = "INSERT INTO authenticator (passCode, registrationOrder) 
+                                    VALUES ('$hashCode', '$registrationOrder' )";
+                mysqli_query($conn, $sql_authenticator);
+                } else {
+                echo "Erro: " . $sql_player . "<br>" . mysqli_error($conn);
+                }          
+                $registration_message = 'User registered successfully!';
         }
         
         // Close database connection
@@ -88,6 +97,11 @@ if (isset($_POST['send'])){
 <body>
     <div id="container">
         <h2>Registration</h2>
+        <?php
+            if (isset($registration_message)) {
+                echo '<p class="registration-message">' . $registration_message . '</p>';
+            }
+        ?>
         <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
