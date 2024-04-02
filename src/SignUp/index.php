@@ -1,6 +1,7 @@
 <?php
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['send'])){
     // Retrieve form data
     $firstname = $_POST['first_name'];
     $lastname = $_POST['last_name'];
@@ -32,21 +33,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If there are no errors, proceed with user registration
     if (empty($errors)) {      
         
-        // Establish database connection 
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "kidsgames";
-        
+        $host = 'localhost'; 
+        $port = '3306';
+        $username = 'root';
+        $password = '123'; //erase or change for you password
+        $database = 'kidsGames'; 
+
         // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        
+        $conn = new mysqli($host, $username, $password, $database, $port);
+
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        
-        // Prepare SQL statement to check if username already exists
+
         $check_username_sql = "SELECT * FROM player WHERE userName = '$uName'";
         $result = $conn->query($check_username_sql);
 
@@ -58,8 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Username is available, proceed with registration
             $registration_time = date("Y-m-d H:i:s"); // Current time
             
-            $sql = "INSERT INTO player (fName, lName, userName, password, registrationTime) 
-                    VALUES ('$firstname', '$lastname', '$uName', '$pass', '$registration_time')";
+            $sql = "INSERT INTO player (fName, lName, userName, registrationTime) 
+                    VALUES ('$firstname', '$lastname', '$uName', '$registration_time')";
             
             if ($conn->query($sql) === TRUE) {
                 echo 'User registered successfully!';
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="container">
         <h2>Registration</h2>
-        <form action="" method="post">
+        <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="last_name" required>
 
-            <input type="submit" value="Register">
+            <input type="submit" value="Register" name="send">
         </form>
     </div>
 
