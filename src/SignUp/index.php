@@ -1,8 +1,6 @@
 <?php
-// Check if the form is submitted
-//if ($_SERVER["REQUEST_METHOD"] == "POST") {
-if (isset($_POST['send'])){
-    // Retrieve form data
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve - Juan Pinero
     $firstname = $_POST['first_name'];
     $lastname = $_POST['last_name'];
     $uName = $_POST['username'];    
@@ -10,7 +8,7 @@ if (isset($_POST['send'])){
     $confirmPass = $_POST['confirm_password'];
 
     // Validate form data
-    $errors = array();
+    $errors = [];
 
     if (empty($firstname)) {
         $errors[] = 'First name is required';
@@ -30,22 +28,15 @@ if (isset($_POST['send'])){
         $errors[] = 'Passwords do not match';
     }
 
-    
-    $hashCode = password_hash($pass, PASSWORD_DEFAULT);
-
-    // If there are no errors, proceed with user registration
+    // Proceed with registration if no errors
     if (empty($errors)) {      
-        
         $host = 'localhost'; 
         $port = '3306';
         $username = 'root';
-        $password = ''; //erase or change for you password
+        $password = 'Joice123456'; 
         $database = 'kidsGames'; 
-
-        // Create connection
         $conn = new mysqli($host, $username, $password, $database, $port);
 
-        // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -54,34 +45,35 @@ if (isset($_POST['send'])){
         $result = $conn->query($check_username_sql);
 
         if ($result->num_rows > 0) {
-            // Username already exists, return error
-            $registration_message = 'Username already exists';
-            //$errors[] = 'Username already exists';
-            echo json_encode($errors);
+            $errors[] = 'Username already exists';
         } else {
-            // Username is available, proceed with registration
-            $registration_time = date("Y-m-d H:i:s"); // Current time
-            
+            $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+
+            $registration_time = date("Y-m-d H:i:s");
             $sql_player = "INSERT INTO player (fName, lName, userName, registrationTime) 
-            VALUES ('$firstname', '$lastname', '$uName', '$registration_time')";
-                if (mysqli_query($conn, $sql_player)) {
-                
-                $registrationOrder = mysqli_insert_id($conn); 
+                            VALUES ('$firstname', '$lastname', '$uName', '$registration_time')";
+
+            if ($conn->query($sql_player) === TRUE) {
+                $registrationOrder = $conn->insert_id; 
 
                 $sql_authenticator = "INSERT INTO authenticator (passCode, registrationOrder) 
-                                    VALUES ('$hashCode', '$registrationOrder' )";
-                mysqli_query($conn, $sql_authenticator);
+                                    VALUES ('$hashedPassword', '$registrationOrder')";
+                if (!$conn->query($sql_authenticator)) {
+                    $errors[] = 'Error: ' . $sql_authenticator . '<br>' . $conn->error;
                 } else {
-                echo "Erro: " . $sql_player . "<br>" . mysqli_error($conn);
-                }          
-                $registration_message = 'User registered successfully!';
+                    $registration_message = 'User registered successfully!';
+                }
+            } else {
+                $errors[] = 'Error: ' . $sql_player . '<br>' . $conn->error;
+            }
         }
         
-        // Close database connection
         $conn->close();
-    } else {
-        // If there are errors, send them back to the client
+    }
+
+    if (!empty($errors)) {
         echo json_encode($errors);
+        exit;
     }
 }
 ?>
@@ -123,8 +115,7 @@ if (isset($_POST['send'])){
     </div>
 
     <div id="navigation">
-        <a href="..\Login\index.php">Log in</a>
+        <a href="../Login/index.php">Log in</a>
     </div>
-
 </body>
 </html>
