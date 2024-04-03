@@ -2,17 +2,10 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     handleGameStart();
-    //seeVariablesState();
+
     $userAnswers = retriveUserInputs();
     $correctAnswer = retriveCorrectAnswer();
-    // seeVariablesState();
-    // echo "<p>+++++++++++ Depois +++++++++++++<p>";
-    handleLevel($userAnswers, $correctAnswer);
-    // seeVariablesState();
-    // echo "<br>";
-    // var_dump($correctAnswer);
-    // echo "<br>";
-    // var_dump($userAnswers);
+    areEqualArrays($userAnswers, $correctAnswer);
     if($_SESSION['level'] < 6){
         header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
     }else{
@@ -34,18 +27,6 @@ function handleGameStart(){
         $_SESSION['lives'] = 5;
         $_SESSION['levelFiles'] = array('level1.php','level2.php','level3.php','level4.php','level5.php','level6.php');
     }
-}
-
-function seeVariablesState(){
-    var_dump($_SESSION['level']);
-    echo "<br>";
-    var_dump($_SESSION['score']);
-    echo "<br>";
-    var_dump($_SESSION['lives']);
-    echo "<br>";
-    var_dump($_SESSION['levelFiles']);
-    echo "<br>";
-    var_dump($_SESSION['levelFiles'][$_SESSION['level']]);
 }
 
 function retriveUserInputs(){
@@ -75,31 +56,6 @@ function retriveUserInputs(){
 function retriveCorrectAnswer(){
     return explode(",", $_POST['answerOptions']); //get the original letters from the form and transform in an array
     
-}
-function handleLevel($userAnswers, $correctAnswer){
-    switch ($_SESSION['level']) {
-        case 0:
-            areEqualArrays($userAnswers, $correctAnswer);
-            break;
-        case 1:
-            areEqualArrays($userAnswers, $correctAnswer);
-            break;
-        case 2:
-            areEqualArrays($userAnswers, $correctAnswer);
-            break;
-        case 3:
-            areEqualArrays($userAnswers, $correctAnswer);
-            break;
-        case 4:
-            areEqualArrays($userAnswers, $correctAnswer);
-            break;
-        case 5:
-            areEqualArrays($userAnswers, $correctAnswer);
-            break;
-        // Pode haver quantos cases forem necessários
-        default:
-            echo "Error";
-    }
 }
 
 //===================================================================================================
