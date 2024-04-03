@@ -27,6 +27,22 @@
     </script>
 </head>
 <body>
+    <div class="lives">
+        <?php
+            session_start();
+            $fullHearts = isset($_SESSION['lives']) ? $_SESSION['lives'] : 5;
+
+            $BrokenHearts = 5 - $fullHearts;
+
+            for($i = 0; $i < $fullHearts; $i++){
+                echo "<img src=\"../../public/img/heart.png\" alt=\"heart\">";
+            }
+            for($i = 0; $i < $BrokenHearts; $i++){
+                echo "<img src=\"../../public/img/heart_broken.png\" alt=\"heart\">";
+            }
+            
+        ?>
+    </div>
     <div class="container">
         <h1>level4 : Order these 6 number in descending order</h1>
         <form id="level4-form" action="game.php" method="post">

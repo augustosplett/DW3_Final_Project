@@ -1,11 +1,15 @@
 <?php 
+//===================================================================================================
+//Deal with the HTTP request
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     handleGameStart();
 
     $userAnswers = retriveUserInputs();
     $correctAnswer = retriveCorrectAnswer();
+
     areEqualArrays($userAnswers, $correctAnswer);
+    
     if($_SESSION['level'] < 6){
         header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
     }else{
