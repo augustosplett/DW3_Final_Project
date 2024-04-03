@@ -1,9 +1,17 @@
 <?php 
+require_once("../db/db_config.php");
+
 //===================================================================================================
 //Deal with the HTTP request
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     handleGameStart();
+
+    if(isset($_POST['cancel'])){
+        handleCancelGame();
+        //insert here the page to send teh user after the cancelation
+        return;
+    }
 
     $userAnswers = retriveUserInputs();
     $correctAnswer = retriveCorrectAnswer();
@@ -15,6 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else{
         Echo "<p>End Game</p>";
     }
+}
+//===================================================================================================
+//Functions to deal with the cancel Game
+function handleCancelGame(){
+    global $conn;
+
+    $livesUsed = intval($_SESSION['lives']);
+    $currentUser = 4;//update here to take the loggedin user
+    $currentDateTime = date('Y-m-d H:i:s');
+    $query = "INSERT INTO score (`scoreTime`, `result`, `livesUsed`, `registrationOrder`) VALUES ('$currentDateTime', 'incomplete', $livesUsed, $currentUser)";
+
+    $conn->query($query);
+
+    $conn->close();
+    return;
 }
 
 //===================================================================================================
