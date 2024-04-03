@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     success: function(response){
                         if(response == "success"){
                             alert("Login Success");
-                            window.location.href = "dashboard.php";
+                            window.location.href = "../Game/game.php";
                         } else {
                             alert("Error: Invalid username or password");
                         }
