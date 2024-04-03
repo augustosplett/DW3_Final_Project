@@ -1,4 +1,41 @@
+// Juan Pinero
 <?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Conexión a la base de datos
+    $servername = "localhost";
+    $port = '3306';        
+    $username = "root"; 
+    $password = "123"; 
+    $database = "kidsGames"; 
+
+    $conn = new mysqli($servername, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Error en la conexión a la base de datos: " . $conn->connect_error);
+    }
+    // Get the data
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM usuarios WHERE username=? AND password=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $_SESSION['username'] = $username;
+        echo "success";
+    } else {
+        echo "error";
+    }
+
+    $stmt->close();
+    $conn->close();
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,12 +44,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-    // backend Juan Pinero
         $(document).ready(function(){
-            // Proceso de inicio de sesión
             $("#login").click(function(){
                 var username = $("#username").val();
                 var password = $("#password").val();
@@ -21,85 +55,33 @@
                     url: "login.php",
                     data: { username: username, password: password },
                     success: function(response){
-                        if(response == "Success"){
+                        if(response == "success"){
                             alert("Login Success");
                             window.location.href = "dashboard.php";
                         } else {
-                            alert("Error: password incorrect");
-                        }
-                    }
-                });
-            });
-
-            // Proceso de recuperación de contraseña
-            $("#recover").click(function(){
-                var email = $("#email").val();
-                $.ajax({
-                    type:"POST", url: "recover_password.php", 
-                    data: { email: email },
-                    success: function(response){
-                        if(response == "Success"){
-                            alert("Email invalid");
-                        } else {
-                            alert("Error: Email no register");
+                            alert("Error: Invalid username or password");
                         }
                     }
                 });
             });
         });
-    // backend Juan Pinero
-
-session_start();
-
-$servername = "localhost";
-$port = '3306';        
-$username = "root"; 
-$password = "123"; 
-$database = "kidsGames"; 
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Error en la conexión a la base de datos: " . $conn->connect_error);
-}
-
-// Obtener datos del formulario
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-// Consulta SQL para verificar credenciales
-$sql = "SELECT * FROM usuarios WHERE username='$username' AND password='$password'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $_SESSION['username'] = $username;
-    echo "success";
-} else {
-    echo "error";
-}
-
-$conn->close();
-    
     </script>
-    
 </head>
 <body>
     <div id="container">
         <h2>Login</h2>
-        <form action="login.php" method="post">
+        <form id="loginForm" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="" placeholder="User Name" required>
+            <input type="text" id="username" name="username" placeholder="Username" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
 
-            <input type="submit" value="Login">
+            <button type="button" id="login">Login</button>
         </form>
         <div class="password-change-link">
-            <a href="..\PasswordManagement\index.php">Forgot your password?</a>
-            <a href="..\SignUp\index.php">Register</a>
+            <a href="../PasswordManagement/index.php">Forgot your password?</a>
+            <a href="../SignUp/index.php">Register</a>
         </div>
     </div>
 </body>
