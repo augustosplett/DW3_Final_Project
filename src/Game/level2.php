@@ -30,7 +30,7 @@
 <body>
     <div class="container">
         <h1>level2 : Order these 6 letters in descending order</h1>
-        <form id="level2-form" action="level3.php" method="post">
+        <form id="level2-form" action="game.php" method="post">
             <label> letters are:
             <?php
                 // Function to generate six different random letters

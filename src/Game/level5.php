@@ -29,7 +29,7 @@
 <body>
     <div class="container">
         <h1>level5 : Identify the first (smallest) and last letter (largest) in a set of 6 letters</h1>
-        <form id="level5-form" action="level6.php" method="post">
+        <form id="level5-form" action="game.php" method="post">
             <label> letters are:
             <?php
                 // Function to generate six different random letters
@@ -43,13 +43,18 @@
                     }
                     return $letters;
                 }
+                function minMax($letters){
+                    $minValue = min($letters);
+                    $maxValue = max($letters);
+                    return [$minValue, $maxValue];
+                }
                 
                 // Generate 6 random letters
                 $letters = generate_letters();
                 
                 // Display the generated letters in a comma-separated format
-                echo implode(", ", $letters); 
-                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(", ", $letters) . "\" style=\"display: none;\">";
+                echo implode(",", $letters); 
+                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(",", minMax($letters)) . "\" style=\"display: none;\">";
 
                 /*// Call the function to identify the first (smallest) and last (largest) letter
                     list($firstLetter, $lastLetter) = identifyFirstLastLetters(implode("", $letters));

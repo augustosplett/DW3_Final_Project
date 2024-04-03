@@ -13,7 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     // var_dump($correctAnswer);
     // echo "<br>";
     // var_dump($userAnswers);
-    header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
+    if($_SESSION['level'] < 6){
+        header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
+    }else{
+        Echo "<p>End Game</p>";
+    }
 }
 
 //===================================================================================================
@@ -48,7 +52,7 @@ function retriveUserInputs(){
     $inputs = []; //declare an array to receive the answers
 
      // Retrieve input values
-    if($_SESSION['level'] <= 4){
+    if($_SESSION['level'] < 4){
 
         $input1 = $_POST['input1'];//take the answer 1
         $input2 = $_POST['input2'];//take the answer 2
@@ -81,16 +85,16 @@ function handleLevel($userAnswers, $correctAnswer){
             areEqualArrays($userAnswers, $correctAnswer);
             break;
         case 2:
-            // código a ser executado caso expressao seja igual a valor2
+            areEqualArrays($userAnswers, $correctAnswer);
             break;
         case 3:
-            // código a ser executado caso expressao seja igual a valor2
+            areEqualArrays($userAnswers, $correctAnswer);
             break;
         case 4:
-            // código a ser executado caso expressao seja igual a valor2
+            areEqualArrays($userAnswers, $correctAnswer);
             break;
         case 5:
-            // código a ser executado caso expressao seja igual a valor2
+            areEqualArrays($userAnswers, $correctAnswer);
             break;
         // Pode haver quantos cases forem necessários
         default:

@@ -30,7 +30,7 @@
 <body>
     <div class="container">
         <h1>level3 : Order these 6 numbers in ascending order</h1>
-        <form id="level3-form" action="level4.php" method="post">
+        <form id="level3-form" action="game.php" method="post">
             <label> numbers are:
             <?php
                 // Function to generate six different random numbers
@@ -44,16 +44,16 @@
                     }
                     return $numbers;
                 }
-                
+                function sortNumberArray($numbers){
+                    sort($numbers);
+                    return $numbers;
+                }
                 // Generate 6 random numbers
                 $numbers = generate_Num();
-                
-                // Sort in descending order
-                sort($numbers);
 
                 // Display the generated numbers in a comma-separated format
-                echo implode(", ", $numbers);
-                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(", ", $numbers) . "\" style=\"display: none;\">";
+                echo implode(",", $numbers);
+                echo "<input type=\"text\" name=\"answerOptions\" value=\"" . implode(",", sortNumberArray($numbers)) . "\" style=\"display: none;\">";
 
             ?>
                 
