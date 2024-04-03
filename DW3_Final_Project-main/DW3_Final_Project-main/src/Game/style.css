@@ -1,0 +1,189 @@
+body {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background-image: url('../../public/img/background1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.lives{
+    margin-top:50px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff6b6b, #74b9ff);
+    transition: background 0.3s ease;
+}
+
+h1:hover {
+    background: linear-gradient(135deg, #ff4040, #0984e3);
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 1px;
+    font-size: 18px;
+    color: #333;
+    padding: 10px 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ffd166, #7ed6df);
+    transition: background 0.3s ease;
+}
+
+label:hover {
+    background: linear-gradient(135deg, #ffb142, #78e08f);
+}
+
+input[type="number"] {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+input[type="text"] {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+/* Different colors for each input */
+input[name="input1"] {
+    background-color: #ff8474;
+}
+
+input[name="input2"] {
+    background-color: #f78fb3;
+}
+
+input[name="input3"] {
+    background-color: #7ed6df;
+}
+
+input[name="input4"] {
+    background-color: #ffd166;
+}
+
+input[name="input5"] {
+    background-color: #6c5ce7;
+}
+
+input[name="input6"] {
+    background-color: #74b9ff;
+}
+
+/* Hover effect */
+input[type="text"]:hover {
+    background-color: #ddd;
+}
+
+   /* Style for buttons */
+input[type="submit"],
+input[type="button"] {
+    padding:  12px 24px; /* Increase padding for larger buttons */
+    background-color: #ff6b6b;
+    background-image: radial-gradient(circle, #ff6b6b 25%, transparent 25%);
+    background-size: 30px 30px;
+    color: #fff;
+    border: none;
+    border-radius: 12px; /* Increase border-radius for rounded corners */
+    font-size: 20px; /* Increase font size for larger buttons */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Comic Sans MS", cursive, sans-serif; /* Add font-family */
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #ff4040;
+}
+
+/* Adjust layout for buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Adjust top margin */
+    margin-right: 40px; /* Adjust right margin */
+    margin-left: 40px; /* Adjust left margin */
+}
+/* Ensure buttons are on the same line */
+input[type="submit"],
+input[type="button"] {
+    width: 45%; /* Adjust width of buttons */
+}
+/* Ensure buttons are on the same line */
+input[type="submit"],
+input[type="button"] {
+    flex: 1; /* Make both buttons occupy equal space */
+    margin-right: 20px; /* Add spacing between buttons */
+}
+.input-group label {
+    display: inline-block;
+    width: 120px; /* Adjust label width as needed */
+    margin-right: 10px; /* Add space between label and input field */
+    font-size: 16px; /* Adjust label font size */
+    color: #333; /* Set label text color */
+}
+.input-group input[type="text"] {
+    width: 180px; /* Adjust input field width */
+    height: 30px; /* Adjust input field height */
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px; /* Adjust input field font size */
+    background-color: #ffd700; /* Happy color (yellow) */
+    color: #333; /* Set input text color */
+    transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+.input-group input[type="text"]:hover {
+    background-color: #ffec8b; /* Change background color on hover */
+}
+
