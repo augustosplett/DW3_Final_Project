@@ -1,4 +1,6 @@
 <?php
+require_once("../db/db_config.php");//get the connection configuration
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve - Juan Pinero
     $firstname = $_POST['first_name'];
@@ -30,16 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Proceed with registration if no errors
     if (empty($errors)) {      
-        $host = 'localhost'; 
-        $port = '3306';
-        $username = 'root';
-        $password = 'Joice123456'; 
-        $database = 'kidsGames'; 
-        $conn = new mysqli($host, $username, $password, $database, $port);
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        global $conn;
 
         $check_username_sql = "SELECT * FROM player WHERE userName = '$uName'";
         $result = $conn->query($check_username_sql);
