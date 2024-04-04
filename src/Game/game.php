@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_SESSION['level'] < 6){
         header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
     }else{
-        Echo "<p>End Game</p>";
+        header("Location: ../Result/index.php"); // move to the result's page
     }
 }
 //===================================================================================================

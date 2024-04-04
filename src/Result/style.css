@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+th {
+    background-color: lightgray;
+    font-weight: bold;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
