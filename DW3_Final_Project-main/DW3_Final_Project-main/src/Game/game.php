@@ -6,7 +6,7 @@ session_start(); // Start or resume session
 //Deal with the HTTP request
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
-    handleGameStart();
+    //handleGameStart();
 
     $userAnswers = retriveUserInputs();
     $correctAnswer = retriveCorrectAnswer();

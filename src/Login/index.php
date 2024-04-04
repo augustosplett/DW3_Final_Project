@@ -1,39 +1,60 @@
-// Juan Pinero
 <?php
+// Juan Pinero
+require_once("../db/db_config.php");//get the connection configuration
+
+function handleGameStart(){
+    // Start or resume session
+    session_start();
+    
+    //start the game if it isn't started
+    //if (!isset($_SESSION['level'])) {
+        // Initialize session variables
+        $_SESSION['level'] = 0;
+        $_SESSION['score'] = 0;
+        $_SESSION['lives'] = 5;
+        $_SESSION['levelFiles'] = array('level1.php','level2.php','level3.php','level4.php','level5.php','level6.php');
+    //}
+}
+
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Conexión a la base de datos
-    $servername = "localhost";
-    $port = '3306';        
-    $username = "root"; 
-    $password = "123"; 
-    $database = "kidsGames"; 
 
-    $conn = new mysqli($servername, $username, $password, $database);
+    global $conn; //importing the default DB connection Configuration
 
-    if ($conn->connect_error) {
-        die("Error en la conexión a la base de datos: " . $conn->connect_error);
-    }
     // Get the data
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios WHERE username=? AND password=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    //query that verify if the user exist and retrive the registration ID
+    $sql = "SELECT `registrationOrder` FROM player WHERE `userName` = '$username'";
 
-    if ($result->num_rows > 0) {
-        $_SESSION['username'] = $username;
-        echo "success";
-    } else {
-        echo "error";
+    $result = mysqli_query($conn, $sql);
+
+    // Check if query was successful
+    if (!$result) {
+        die('Query failed: ' . mysqli_error($conn));
     }
 
-    $stmt->close();
-    $conn->close();
+    if ($result->num_rows > 0) {
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $registrationOrder = $row['registrationOrder'];
+        }
+        //now we have the registration order, we need to get the password to compare
+        $passwordQuery = "SELECT passCode FROM kidsGames.authenticator WHERE registrationOrder = '$registrationOrder'";
+        $passwordResult = mysqli_query($conn, $passwordQuery);
+        while ($row = mysqli_fetch_assoc($passwordResult)) {
+            $hashedPassword = $row['passCode'];
+        }
+        
+        if(password_verify($password, $hashedPassword)){
+            //echo "Password Match";
+            $_SESSION['username'] = $username;
+            handleGameStart();  
+            header("Location: ../Game/level1.php"); // move to the result's page
+        }
+    }
     exit();
 }
 ?>
@@ -70,14 +91,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="container">
         <h2>Login</h2>
-        <form id="loginForm" method="post">
+        <form id="loginForm" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" placeholder="Username" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
 
-            <button type="button" id="login">Login</button>
+            <input type="submit" value="Login">
         </form>
         <div class="password-change-link">
             <a href="../PasswordManagement/index.php">Forgot your password?</a>

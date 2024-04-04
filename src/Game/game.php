@@ -4,8 +4,8 @@ require_once("../db/db_config.php");
 //===================================================================================================
 //Deal with the HTTP request
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-    handleGameStart();
+    session_start();
+    //handleGameStart();
 
     if(isset($_POST['cancel'])){
         handleCancelGame();
@@ -42,19 +42,6 @@ function handleCancelGame(){
 
 //===================================================================================================
 //Functions to deal with the inputs
-function handleGameStart(){
-    // Start or resume session
-    session_start();
-    
-    //start the game if it isn't started
-    if (!isset($_SESSION['level'])) {
-        // Initialize session variables
-        $_SESSION['level'] = 0;
-        $_SESSION['score'] = 0;
-        $_SESSION['lives'] = 5;
-        $_SESSION['levelFiles'] = array('level1.php','level2.php','level3.php','level4.php','level5.php','level6.php');
-    }
-}
 
 function retriveUserInputs(){
     $inputs = []; //declare an array to receive the answers
