@@ -17,7 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $correctAnswer = retriveCorrectAnswer();
 
     areEqualArrays($userAnswers, $correctAnswer);
-    
+
+    if(intval($_SESSION['lives']) == 0){
+        saveFinalResult("gameover");
+        header("Location: ../GameOver/index.php");
+        return;
+    }
+
     if($_SESSION['level'] < 6){
         header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
     }else{
@@ -45,7 +51,6 @@ function saveFinalResult($gameResult){
 
 //===================================================================================================
 //Functions to deal with the inputs
-
 function retriveUserInputs(){
     $inputs = []; //declare an array to receive the answers
 
