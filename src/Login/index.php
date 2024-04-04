@@ -53,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $username;
             handleGameStart();  
             header("Location: ../Game/level1.php"); // move to the result's page
+        }else{
+            header("Location: index.php");
         }
     }
     exit();
