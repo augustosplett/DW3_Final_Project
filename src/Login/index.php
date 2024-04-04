@@ -51,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(password_verify($password, $hashedPassword)){
             //echo "Password Match";
             $_SESSION['username'] = $username;
+            $_SESSION['registrationOrder'] = $registrationOrder;
             handleGameStart();  
             header("Location: ../Game/level1.php"); // move to the result's page
         }else{

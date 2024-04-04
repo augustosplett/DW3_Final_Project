@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     //handleGameStart();
 
     if(isset($_POST['cancel'])){
-        handleCancelGame();
+        saveFinalResult("incomplete");
         //insert here the page to send teh user after the cancelation
         return;
     }
@@ -21,18 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_SESSION['level'] < 6){
         header("Location: ".$_SESSION['levelFiles'][$_SESSION['level']]); // move to next level or reload the page
     }else{
+        saveFinalResult("win");
         header("Location: ../Result/index.php"); // move to the result's page
     }
 }
+
 //===================================================================================================
-//Functions to deal with the cancel Game
-function handleCancelGame(){
+//Functions to save the final score case the user finish/cancel/lose the game
+function saveFinalResult($gameResult){
     global $conn;
 
     $livesUsed = intval($_SESSION['lives']);
-    $currentUser = 4;//update here to take the loggedin user
+    $registrationOrder = intval($_SESSION['registrationOrder']);//update here to take the loggedin user
     $currentDateTime = date('Y-m-d H:i:s');
-    $query = "INSERT INTO score (`scoreTime`, `result`, `livesUsed`, `registrationOrder`) VALUES ('$currentDateTime', 'incomplete', $livesUsed, $currentUser)";
+    //$query = "INSERT INTO score (`scoreTime`, `result`, `livesUsed`, `registrationOrder`) VALUES ('$currentDateTime', '$gameResult', $livesUsed, $registrationOrder)";
+    $query = "INSERT INTO score (`scoreTime`, `result`, `livesUsed`, `registrationOrder`) VALUES ('$currentDateTime', '$gameResult', $livesUsed, $registrationOrder)";
 
     $conn->query($query);
 
