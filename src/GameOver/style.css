@@ -4,8 +4,9 @@
 
 body{
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
@@ -17,24 +18,20 @@ body{
     background-attachment: fixed;
 }
 
-
-th {
-    background-color: lightgray;
-    font-weight: bold;
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
 .container {
     padding: 2vh;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    background-color: #cbaacb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

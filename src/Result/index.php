@@ -33,15 +33,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <table>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Result</th>
-            <th scope="col">Lives Used</th>
-        </tr>
-        <tr>
-            <?php echo loadResultsTable(); ?>
-        </tr>
-    </table>
+    <div class="container">
+        <table>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Result</th>
+                <th scope="col">Lives Used</th>
+            </tr>
+            <tr>
+                <?php echo loadResultsTable(); ?>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
