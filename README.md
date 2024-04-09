@@ -17,7 +17,7 @@ Probably you will just have to adjust the password:
 ![alt text](docs/image-1.png)
 
 # Running the application
-1 - To test the application you can copy and past the project files inside your (XAMPP | MAMPP | WAMPP) folder and access this address on your browser: http://localhost/dw3_final_project/
+1 - To test the application you can copy and past the project files inside your (XAMPP | MAMPP | WAMPP) folder and access this address on your browser: http://localhost/dw3_final_project-main/
 
 2 - Create a user:
 2.1 - click on registration button:
