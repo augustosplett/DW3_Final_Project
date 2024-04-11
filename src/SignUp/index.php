@@ -1,8 +1,10 @@
 <?php
 require_once("../db/db_config.php");//get the connection configuration
 
+$registration_message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve - Juan Pinero
+    // Retrieve form data
     $firstname = $_POST['first_name'];
     $lastname = $_POST['last_name'];
     $uName = $_POST['username'];    
@@ -13,33 +15,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     if (empty($firstname)) {
-        $errors[] = 'First name is required';
+        $errors[] = ['field' => 'first_name', 'message' => 'First name is required'];
     }
 
     if (empty($lastname)) {
-        $errors[] = 'Last name is required';
+        $errors[] = ['field' => 'last_name', 'message' => 'Last name is required'];
     }
 
     if (empty($uName)) {
-        $errors[] = 'Username is required';
+        $errors[] = ['field' => 'username', 'message' => 'Username is required'];
+    } elseif (strlen($uName) < 8 || !preg_match('/[A-Z]/', $uName)) {
+        $errors[] = ['field' => 'username', 'message' => 'Username must be at least 8 characters long and contain at least one uppercase letter'];
     }
 
     if (empty($pass)) {
-        $errors[] = 'Password is required';
+        $errors[] = ['field' => 'password', 'message' => 'Password is required'];
     } elseif ($pass !== $confirmPass) {
-        $errors[] = 'Passwords do not match';
+        $errors[] = ['field' => 'confirm_password', 'message' => 'Passwords do not match'];
+    } elseif (strlen($pass) < 8 || !preg_match('/[A-Z]/', $pass)) {
+        $errors[] = ['field' => 'password', 'message' => 'Password must be at least 8 characters long and contain at least one uppercase letter'];
     }
 
     // Proceed with registration if no errors
     if (empty($errors)) {      
-
         global $conn;
 
         $check_username_sql = "SELECT * FROM player WHERE userName = '$uName'";
         $result = $conn->query($check_username_sql);
 
         if ($result->num_rows > 0) {
-            $errors[] = 'Username already exists';
+            $errors[] = ['field' => 'username', 'message' => 'Username already exists'];
         } else {
             $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
 
@@ -53,12 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $sql_authenticator = "INSERT INTO authenticator (passCode, registrationOrder) 
                                     VALUES ('$hashedPassword', '$registrationOrder')";
                 if (!$conn->query($sql_authenticator)) {
-                    $errors[] = 'Error: ' . $sql_authenticator . '<br>' . $conn->error;
+                    $errors[] = ['field' => 'database', 'message' => 'Error saving data to the database'];
                 } else {
                     $registration_message = 'User registered successfully!';
                 }
             } else {
-                $errors[] = 'Error: ' . $sql_player . '<br>' . $conn->error;
+                $errors[] = ['field' => 'database', 'message' => 'Error saving data to the database'];
             }
         }
         
@@ -81,28 +86,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
+<div id="container">
         <h2>Registration</h2>
-        <?php
-            if (isset($registration_message)) {
-                echo '<p class="registration-message">' . $registration_message . '</p>';
-            }
-        ?>
-        <form action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+        <form id="registrationForm" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
+            <span id="username-error" class="error"></span>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            <span id="password-error" class="error"></span>
 
             <label for="confirm_password">Confirm Password:</label>
             <input type="password" id="confirm_password" name="confirm_password" required>
+            <span id="confirm_password-error" class="error"></span>
 
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" required>
+            <span id="first_name-error" class="error"></span>
 
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="last_name" required>
+            <span id="last_name-error" class="error"></span>
 
             <input type="submit" value="Register" name="send">
         </form>
@@ -111,5 +116,138 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="navigation">
         <a href="../Login/index.php">Log in</a>
     </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p>User registered successfully!</p>
+            <button id="ok-button">OK</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            // Function to display modal
+            function showModal() {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+
+            // Function to hide modal and redirect to another page
+            function hideModalAndRedirect() {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+                // Redirect to another page
+                window.location.href = "../../";
+            }
+
+            // When the user clicks OK, hide modal and redirect to another page
+            $("#ok-button").click(function() {
+                hideModalAndRedirect();
+            });
+
+            // Function to display PHP error message
+            function displayPhpErrors() {
+                if (typeof phpErrors !== 'undefined' && phpErrors.length > 0) {
+                    phpErrors.forEach(function(error) {
+                        if (error.field === 'username') {
+                            $('#username-error').text(error.message).addClass('error').show();
+                        } else if (error.field === 'password') {
+                            $('#password-error').text(error.message).addClass('error').show();
+                        }
+                    });
+                }
+            }
+
+            // Call the function to display PHP error message
+            displayPhpErrors();
+
+            // Check if there is a registration success message and display the modal
+            <?php if(isset($registration_message) && !empty($registration_message)) { ?>
+                showModal();
+            <?php } ?>
+
+            // Function to check if username exists
+            function checkUsername() {
+                var username = $('#username').val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'check_username.php',
+                    data: { username: username },
+                    dataType: 'json',
+                    success: function(response){
+                        if(response.exists) {
+                            $('#username-error').text('Username already exists').addClass('error').show();
+                        } else {
+                            $('#username-error').text('').removeClass('error').hide();
+                        }
+                    }
+                });
+            }
+
+            // Check username on keyup
+            $('#username').keyup(function(){
+                checkUsername();
+            });
+
+            // Function to validate password
+            function validatePassword() {
+                var password = $('#password').val();
+                if (password.length < 8 || !/[A-Z]/.test(password)) {
+                    $('#password-error').text('Password must be at least 8 characters long and contain at least one uppercase letter').addClass('error').show();
+                } else {
+                    $('#password-error').text('').removeClass('error').hide();
+                }
+            }
+
+            // Function to validate confirm password
+            function validateConfirmPassword() {
+                var password = $('#password').val();
+                var confirm_password = $('#confirm_password').val();
+                if (password !== confirm_password) {
+                    $('#confirm_password-error').text('Passwords do not match').addClass('error').show();
+                } else {
+                    $('#confirm_password-error').text('').removeClass('error').hide();
+                }
+            }
+
+            // Check password on keyup
+            $('#password').keyup(function(){
+                validatePassword();
+                validateConfirmPassword();
+            });
+
+            // Check confirm password on keyup
+            $('#confirm_password').keyup(function(){
+                validateConfirmPassword();
+            });
+
+            // Validate form on submit
+            $('#registrationForm').submit(function(e) {
+                // Clear existing error message
+                $('.error').empty().hide();
+
+                // Validate username field
+                if ($('#username').val().length < 8 || !/^[A-Z]/.test($('#username').val())) {
+                    $('#username-error').text('Username must be at least 8 characters long and start with an uppercase letter').addClass('error').show();
+                    e.preventDefault(); // Prevent form submission
+                } else {
+                    // Check if the username already exists in the database
+                    checkUsername();
+                }
+
+                // Validate password field
+                validatePassword();
+                validateConfirmPassword();
+
+                // Check for errors before submitting the form
+                if ($('.error:visible').length > 0) {
+                    e.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
 </body>
 </html>
