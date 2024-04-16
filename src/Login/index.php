@@ -64,6 +64,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -88,21 +92,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </head>
 <body>
-    <div id="container">
-        <h2>Login</h2>
-        <form id="loginForm" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Username" required>
+    <div class="my-container">
+        <div class="glass-container" >
+            <h2>Login</h2>
+            <form id="loginForm" action="<?php echo $_SERVER['SCRIPT_NAME']; ?>" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Password" required>
-
-            <input type="submit" value="Login">
-        </form>
-        <div class="password-change-link">
-            <a href="../PasswordManagement/index.php">Forgot your password?</a>
-            <a href="../SignUp/index.php">Register</a>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <br>
+                <input class="btn btn-success button-a" type="submit" value="Login">
+            </form>
+            <div class="password-change-link">
+                <a href="../PasswordManagement/index.php">Forgot your password?</a>
+                <a href="../SignUp/index.php">Register</a>
+            </div>
         </div>
     </div>
+    
+    <footer class="footer">
+        <ul>
+            <li>College LaSalle</li>
+            <li>DW3 Course</li>
+            <li>2024</li>
+            <li>Augusto Madeira Splett - Faiqa Faiqa - Juan Manuel Pinero Delgadillo - Rony Raug - Yasmeen Al Dali</li>
+        </ul>
+    </footer>
 </body>
 </html>

@@ -66,3 +66,19 @@ a {
     border-radius: 4px;
     cursor: pointer;
 }
+
+/*Augusto Splett*/
+.footer {
+    background: rgba(255, 255, 255, 0.6);
+    height: 15%;
+    color: #212529;
+    font-weight: 700;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer ul{
+    list-style: none;
+  }

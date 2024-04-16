@@ -10,14 +10,16 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    width: 100vw;
+    height: 100vh;
 }
 h1{
     text-align: center;
     padding: 2%;
 }
 .my-container{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 85%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,8 +27,8 @@ h1{
 }
 
 .glass-container{
-    width: 60vw;
-    height: 50vh;
+    width: 40%;
+    height: 50%;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -50,4 +52,18 @@ h1{
     width: 40%;
     min-width: 150px;
     max-width: 250px;
+}
+.footer {
+    background: rgba(255, 255, 255, 0.6);
+    height: 15%;
+    color: #212529;
+    font-weight: 700;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.footer ul{
+    list-style: none;
 }

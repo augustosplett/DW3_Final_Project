@@ -50,5 +50,13 @@
             <a href="../../index.php"> Home </a>
         </div>
     </div>
+    <footer class="footer">
+        <ul>
+            <li>College LaSalle</li>
+            <li>DW3 Course</li>
+            <li>2024</li>
+            <li>Augusto Madeira Splett - Faiqa Faiqa - Juan Manuel Pinero Delgadillo - Rony Raug - Yasmeen Al Dali</li>
+        </ul>
+    </footer>
 </body>
 </html>
