@@ -20,7 +20,7 @@
             session_start();
             $fullHearts = isset($_SESSION['lives']) ? $_SESSION['lives'] : 5;
 
-            $BrokenHearts = 5 - $fullHearts;
+            $BrokenHearts = 6 - $fullHearts;
 
             for($i = 0; $i < $fullHearts; $i++){
                 echo "<img src=\"../../public/img/heart.png\" alt=\"heart\">";

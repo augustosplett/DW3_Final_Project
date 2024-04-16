@@ -3,7 +3,7 @@
     $host = 'localhost'; 
     $port = '3306';
     $username = 'root';
-    $password = ''; //erase or change for you password
+    $password = '123'; //erase or change for you password
     $database = 'kidsGames'; 
 
     // Create connection

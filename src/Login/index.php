@@ -11,7 +11,7 @@ function handleGameStart(){
         // Initialize session variables
         $_SESSION['level'] = 0;
         $_SESSION['score'] = 0;
-        $_SESSION['lives'] = 5;
+        $_SESSION['lives'] = 6;
         $_SESSION['levelFiles'] = array('level1.php','level2.php','level3.php','level4.php','level5.php','level6.php');
     //}
 }
