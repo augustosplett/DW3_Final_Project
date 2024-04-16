@@ -45,5 +45,11 @@
             </tr>
         </table>
     </div>
+    <div class="container">
+        <div>
+            <a href="../../index.php"> Home </a>
+            <a href="../Result/index.php"> Results </a>
+        </div>
+    </div>
 </body>
 </html>
