@@ -9,7 +9,10 @@
 <body>
     <div class="container">
         <h1>Game Over</h1>
-        <a href="../../index.php"> Home </a>
+        <div>
+            <a href="../../index.php"> Home </a>
+            <a href="../Result/index.php"> Results </a>
+        </div>
     </div>
 </body>
 </html>
