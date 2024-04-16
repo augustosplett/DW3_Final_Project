@@ -2,7 +2,7 @@
 require_once("../db/db_config.php");
 
 //===================================================================================================
-//Deal with the HTTP request
+//Deal with the HTTP request - Augusto Splett
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     session_start();
     //handleGameStart();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 //===================================================================================================
-//Functions to save the final score case the user finish/cancel/lose the game
+//Functions to save the final score case the user finish/cancel/lose the game - Augusto Splett
 function saveFinalResult($gameResult){
     global $conn;
 
@@ -50,7 +50,7 @@ function saveFinalResult($gameResult){
 }
 
 //===================================================================================================
-//Functions to deal with the inputs
+//Functions to deal with the inputs - Augusto Splett
 function retriveUserInputs(){
     $inputs = []; //declare an array to receive the answers
 
@@ -81,7 +81,7 @@ function retriveCorrectAnswer(){
 }
 
 //===================================================================================================
-//Function to validate the question's answers
+//Function to validate the question's answers - Augusto Splett
 function areEqualArrays($userInputs, $correctAnswer) { // Function to check if the letter in two arrays are exactly the same
 
     $areEqual = true;

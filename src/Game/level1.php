@@ -10,7 +10,7 @@
     <div class="lives">
         <?php
             session_start();
-            $fullHearts = isset($_SESSION['lives']) ? $_SESSION['lives'] : 5;
+            $fullHearts = isset($_SESSION['lives']) ? $_SESSION['lives'] : 6;
 
             $BrokenHearts = 6 - $fullHearts;
 

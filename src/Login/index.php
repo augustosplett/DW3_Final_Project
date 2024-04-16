@@ -1,19 +1,15 @@
 <?php
-// Juan Pinero
 require_once("../db/db_config.php");//get the connection configuration
-
+//Augusto Splett
 function handleGameStart(){
     // Start or resume session
     session_start();
     
-    //start the game if it isn't started
-    //if (!isset($_SESSION['level'])) {
-        // Initialize session variables
-        $_SESSION['level'] = 0;
-        $_SESSION['score'] = 0;
-        $_SESSION['lives'] = 6;
-        $_SESSION['levelFiles'] = array('level1.php','level2.php','level3.php','level4.php','level5.php','level6.php');
-    //}
+    $_SESSION['level'] = 0;
+    $_SESSION['score'] = 0;
+    $_SESSION['lives'] = 6;
+    $_SESSION['levelFiles'] = array('level1.php','level2.php','level3.php','level4.php','level5.php','level6.php');
+
 }
 
 session_start();
