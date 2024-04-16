@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level 6: Identify the smallest and the largest number in a set of 6 numbers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script>
             // JavaScript code to handle the cancel button click event
@@ -15,6 +18,7 @@
     </script>
 </head>
 <body>
+<div class="my-container">
     <div class="lives">
         <?php
             session_start();
@@ -62,14 +66,14 @@
             </label>
             <br>
             <div class="input-group">
-                <label for="input1">Enter the smallest number:</label>
-                <input type="number" id="input1" name="input1" min="0" max="100" required>
+                <label class="input-group-label" for="input01">Enter the smallest number:</label>
+                <input class="input-group-text" type="number" id="input01" name="input01" min="0" max="100" required>
                 <br>
             </div>
 
             <div class="input-group">
-                <label for="input2">Enter the largest number:</label>
-                <input type="number" id="input2" name="input2" min="0" max="100" required>
+                <label class="input-group-label" for="input02">Enter the largest number:</label>
+                <input class="input-group-text" type="number" id="input02" name="input02" min="0" max="100" required>
                 <br>
             </div>
             <div>
@@ -82,5 +86,14 @@
             </div>
         </form>
     </div>
+    </div>
+    <footer class="footer">
+        <ul>
+            <li>College LaSalle</li>
+            <li>DW3 Course</li>
+            <li>2024</li>
+            <li>Augusto Madeira Splett - Faiqa Faiqa - Juan Manuel Pinero Delgadillo - Rony Raug - Yasmeen Al Dali</li>
+        </ul>
+    </footer>
 </body>
 </html>

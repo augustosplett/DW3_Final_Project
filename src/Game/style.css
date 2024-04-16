@@ -1,20 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
-    font-family: "Comic Sans MS", cursive, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
     background-image: url('../../public/img/background1.jpg'); 
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
 }
-
+.my-container{
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .lives{
-    margin-top:50px;
-    max-width: 500px;
+    width: 500px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -98,9 +108,14 @@ input[type="text"] {
 input[name="input1"] {
     background-color: #ff8474;
 }
-
+input[name="input01"] {
+    background-color: #ff8474;
+}
 input[name="input2"] {
     background-color: #f78fb3;
+}
+input[name="input02"] {
+    background-color: #ff8474;
 }
 
 input[name="input3"] {
@@ -164,26 +179,35 @@ input[type="button"] {
     flex: 1; /* Make both buttons occupy equal space */
     margin-right: 20px; /* Add spacing between buttons */
 }
-.input-group label {
-    display: inline-block;
-    width: 120px; /* Adjust label width as needed */
-    margin-right: 10px; /* Add space between label and input field */
-    font-size: 16px; /* Adjust label font size */
-    color: #333; /* Set label text color */
+.input-group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.input-group input[type="text"] {
-    width: 180px; /* Adjust input field width */
-    height: 30px; /* Adjust input field height */
+.input-group label{
+    background-color: #212529;
+    
+}
+.input-group input{
+    width: 20%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+/*Augusto Splett*/
+.footer {
+    background: rgba(255, 255, 255, 0.6);
+    height: 15%;
+    color: #212529;
+    font-weight: 700;
+    padding: 20px;
     text-align: center;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px; /* Adjust input field font size */
-    background-color: #ffd700; /* Happy color (yellow) */
-    color: #333; /* Set input text color */
-    transition: background-color 0.3s ease; /* Add transition effect */
-}
-
-.input-group input[type="text"]:hover {
-    background-color: #ffec8b; /* Change background color on hover */
-}
-
+    position: relative;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer ul{
+    list-style: none;
+  }

@@ -67,8 +67,8 @@ function retriveUserInputs(){
         $inputs = array($input1, $input2, $input3, $input4,  $input5, $input6);
     }else{//the levels 5 and 6 have just 2 answers
 
-        $input1 = $_POST['input1'];//take the answer 1
-        $input2 = $_POST['input2'];//take the answer 2
+        $input1 = $_POST['input01'];//take the answer 1
+        $input2 = $_POST['input02'];//take the answer 2
 
         $inputs = array($input1, $input2);
     }
