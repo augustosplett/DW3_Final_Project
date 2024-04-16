@@ -84,44 +84,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
 </head>
 <body>
-<div id="container">
-        <h2>Registration</h2>
-        <form id="registrationForm" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <span id="username-error" class="error"></span>
+    <div class="my-container" >
+        <div class="glass-container">
+            <h2>Registration</h2>
+            <form id="registrationForm" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <span id="username-error" class="error"></span>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <span id="password-error" class="error"></span>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <span id="password-error" class="error"></span>
 
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" id="confirm_password" name="confirm_password" required>
-            <span id="confirm_password-error" class="error"></span>
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <span id="confirm_password-error" class="error"></span>
 
-            <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="first_name" required>
-            <span id="first_name-error" class="error"></span>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+                <span id="first_name-error" class="error"></span>
 
-            <label for="last_name">Last Name:</label>
-            <input type="text" id="last_name" name="last_name" required>
-            <span id="last_name-error" class="error"></span>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+                <span id="last_name-error" class="error"></span>
+                <br>
+                <input class="btn btn-success button-a" type="submit" value="Register" name="send">
+            </form>
+            <br>
+            <div>
+                <a href="../../index.php">Home</a>
+                <a href="../Login/index.php">Log in</a>
+            </div>
 
-            <input type="submit" value="Register" name="send">
-        </form>
-    </div>
-
-    <div id="navigation">
-        <a href="../Login/index.php">Log in</a>
-    </div>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <p>User registered successfully!</p>
-            <button id="ok-button">OK</button>
+            <!-- Modal -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <p>User registered successfully!</p>
+                    <button id="ok-button">OK</button>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="footer">

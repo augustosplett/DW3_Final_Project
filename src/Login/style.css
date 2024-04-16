@@ -65,7 +65,7 @@ form{
     position: relative;
     bottom: 0;
     width: 100%;
-  }
-  .footer ul{
-    list-style: none;
-  }
+}
+.footer ul{
+list-style: none;
+}
